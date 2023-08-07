@@ -42,7 +42,9 @@ public class SecurityConfig {
                         .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authenticationProvider(authenticationProvider)
                         .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+
                         .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
+                                .logoutUrl("/api/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext())))
                         .build();
